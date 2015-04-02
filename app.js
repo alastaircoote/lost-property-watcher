@@ -78,7 +78,7 @@ const doCheck = () => {
             let lostArticlesDiff = results.lostArticles
             try {
                 lostArticlesDiff = results.lostArticles - lastResult.lostArticles
-            } catch () {
+            } catch (ex) {
                 console.log("No previous lost articles total")
             }
             if (lostArticlesDiff != 0) {
@@ -93,7 +93,7 @@ const doCheck = () => {
             let itemsClaimedDiff = results.itemsClaimed
             try {
                 itemsClaimedDiff = results.itemsClaimed - lastResult.itemsClaimed
-            } catch () {
+            } catch (ex) {
                 console.log("No previous items claimed total")
             }
 
