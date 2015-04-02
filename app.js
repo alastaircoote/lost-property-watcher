@@ -56,7 +56,12 @@ const doCheck = () => {
             for (let category in results.categories) {
                 for (let subcat in results.categories[category]) {
                     let count = results.categories[category][subcat];
-                    let diff =  count - lastResult.categories[category][subcat];
+                    let diff = count;
+                    try {
+                        diff = count - lastResult.categories[category][subcat];
+                    } catch (ex) {
+                        console.log("No previous category")
+                    }
                     if (diff != 0) {
                         todaysResults.push({
                             event: 'subcategory_change',
@@ -70,7 +75,12 @@ const doCheck = () => {
                 }
             }
 
-            let lostArticlesDiff = results.lostArticles - lastResult.lostArticles
+            let lostArticlesDiff = results.lostArticles
+            try {
+                lostArticlesDiff = results.lostArticles - lastResult.lostArticles
+            } catch () {
+                console.log("No previous lost articles total")
+            }
             if (lostArticlesDiff != 0) {
                 todaysResults.push({
                     event: 'lost_articles_change',
@@ -80,7 +90,13 @@ const doCheck = () => {
                 })
             }
 
-            let itemsClaimedDiff = results.itemsClaimed - lastResult.itemsClaimed
+            let itemsClaimedDiff = results.itemsClaimed
+            try {
+                itemsClaimedDiff = results.itemsClaimed - lastResult.itemsClaimed
+            } catch () {
+                console.log("No previous items claimed total")
+            }
+
             if (lostArticlesDiff != 0) {
                 todaysResults.push({
                     event: 'items_claimed_change',
